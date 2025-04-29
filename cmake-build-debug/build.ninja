@@ -61,6 +61,12 @@ build CMakeFiles/c_program.dir/add.cpp.o: CXX_COMPILER__c_program_unscanned_Debu
   OBJECT_DIR = CMakeFiles/c_program.dir
   OBJECT_FILE_DIR = CMakeFiles/c_program.dir
 
+build CMakeFiles/c_program.dir/person.cpp.o: CXX_COMPILER__c_program_unscanned_Debug /Users/artsiom.karpinchyk/Desktop/polnaya$ huinia/c_wasm_test/c_program/person.cpp || cmake_object_order_depends_target_c_program
+  DEP_FILE = CMakeFiles/c_program.dir/person.cpp.o.d
+  FLAGS = -g -std=gnu++2b -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/c_program.dir
+  OBJECT_FILE_DIR = CMakeFiles/c_program.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target c_program
@@ -69,7 +75,7 @@ build CMakeFiles/c_program.dir/add.cpp.o: CXX_COMPILER__c_program_unscanned_Debu
 #############################################
 # Link the executable c_program
 
-build c_program: CXX_EXECUTABLE_LINKER__c_program_Debug CMakeFiles/c_program.dir/main.cpp.o CMakeFiles/c_program.dir/add.cpp.o
+build c_program: CXX_EXECUTABLE_LINKER__c_program_Debug CMakeFiles/c_program.dir/main.cpp.o CMakeFiles/c_program.dir/add.cpp.o CMakeFiles/c_program.dir/person.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk
   OBJECT_DIR = CMakeFiles/c_program.dir
   POST_BUILD = :

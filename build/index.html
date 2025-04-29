@@ -6,12 +6,12 @@
     <title>Document</title>
 </head>
 <body>
+    <script src="./allocateStringMemory.js"></script>
     <script src="./add.js"></script>
+    <script src="./person.js"></script>
     <script>
-        console.log(Module().then(res => {
-            console.log(res)
-            const res1 = res._add(2,4)
-            console.log({res1})
+        Module().then(res => {
+            
             const sumArray = res._sumArray;
             const vectorBuffer = new Int32Array([1, 2, 3, 4, 5, 6])
 
@@ -26,7 +26,47 @@
             res._free(pointer);
 
             console.log('Результат функции sumArray:', result);
-        }))
+        })
     </script>
+
+<script>
+    personModule().then(module => {
+
+        const persons = [{ name: 'k1', age: 10 },
+            { name: 'k2', age: 20 },
+            { name: 'k3', age: 30 },
+            { name: 'k4', age: 40 }]
+
+        const NAME_BYTES_SIZE = 4
+        const AGE_BYTES_SIZE = 4
+        const ONE_PERSON_BYTES_SIZE = NAME_BYTES_SIZE + AGE_BYTES_SIZE
+
+        const PERSONS_ARRAY_BYTES_SIZE = ONE_PERSON_BYTES_SIZE * persons.length
+
+        const personsMemoryPointer = module._malloc(PERSONS_ARRAY_BYTES_SIZE)
+
+        persons.forEach(({age, name}, index) => {
+            const {memoryPointer: namePointer} = allocateStringMemory(name, module)
+            
+            module.setValue(personsMemoryPointer + index * ONE_PERSON_BYTES_SIZE, namePointer, '*' )
+            module.setValue(personsMemoryPointer + index * ONE_PERSON_BYTES_SIZE + AGE_BYTES_SIZE, age, 'i32' )
+        })
+
+        const getOldestPersonFn = module._getTheOldestPerson
+
+        const resultPersonPointer = getOldestPersonFn(personsMemoryPointer, persons.length)
+        const namePointer = module.getValue(resultPersonPointer, '*');
+        const name = module.UTF8ToString(namePointer);
+        const agePointer = module.getValue(resultPersonPointer + AGE_BYTES_SIZE, 'i32');
+        const age = agePointer
+
+        console.log({age, name, resultPersonPointer})
+
+
+        module._free(personsMemoryPointer)
+        module._free(resultPersonPointer) // TODO: пофиксить memory access out of bounds
+        module._free(namePointer)
+    })
+</script>
 </body>
 </html>
