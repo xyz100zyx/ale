@@ -1,0 +1,3 @@
+/Users/artsiom.karpinchyk/Desktop/polnaya huinia/c_wasm_test/c_program/cmake-build-debug/CMakeFiles/c_program.dir
+/Users/artsiom.karpinchyk/Desktop/polnaya huinia/c_wasm_test/c_program/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/artsiom.karpinchyk/Desktop/polnaya huinia/c_wasm_test/c_program/cmake-build-debug/CMakeFiles/rebuild_cache.dir
